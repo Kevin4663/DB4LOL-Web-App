@@ -23,8 +23,8 @@ export const getSummonerPUUID = async (gameName, tagline) => {
             return null;
         }
 
-        const data = await res.json();
-        const puuid = data.puuid;
+        const dataObject = await res.json();
+        const puuid = dataObject.puuid;
         return puuid;
     } catch (err) {
         console.error("Error fetching summoner data:", err);
