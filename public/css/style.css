@@ -60,13 +60,13 @@ main {
     font-weight: 500;
 }
 
-.user-search {
+.nav-links a.active {
+    border-bottom: 2px solid rgb(153, 136, 136);
+}
+
+.summoner-search button, input {
     border: none;
     padding: 15px 20px;
     font-size: 18px;
     border-radius: 8px;
-}
-
-.nav-links a.active {
-    border-bottom: 2px solid rgb(153, 136, 136);
 }

@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 const RIOT_API_KEY = process.env.RIOT_API_KEY;
 
 export const getLatestVersion = async () => {
@@ -8,6 +11,26 @@ export const getLatestVersion = async () => {
         return version;
     } catch (err) {
         console.error("Error fetching latest version:", err);
+        return null; 
+    }
+};
+
+export const getSummonerPUUID = async (gameName, tagline) => {
+    try{
+        const link = `https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagline}?api_key=${RIOT_API_KEY}`;
+        const res = await fetch(link);
+
+        if (!res.ok) {
+            const errorBody = await res.text();
+            console.error(`Riot API Error (${res.status}):`, errorBody);
+            return null;
+        }
+
+        const data = await res.json();
+        const puuid = data.puuid;
+        return puuid;
+    } catch (err) {
+        console.error("Error fetching summoner data:", err);
         return null; 
     }
 };

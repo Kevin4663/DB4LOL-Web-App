@@ -5,7 +5,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import pool from "./app/db.js"
 import { getLatestVersion } from "./app/services/riotServices.js";
-
+import { getSummonerPUUID } from "./app/services/riotServices.js";
 
 const app = express();
 const port = 3000;
@@ -14,11 +14,11 @@ app.set("view engine", "ejs")
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 //middleware
 app.use(express.static(path.join(__dirname, "public")))
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(async (req, res, next) => {
     try {
         res.locals.version = await getLatestVersion();
@@ -63,8 +63,19 @@ app.get("/build", async (req, res) => {
 //stat
 app.get("/stat", async (req, res) => {
     try{
-        res.render('stat', { currentPage: "stat" })
+        res.render('stat', { currentPage: "stat", puuid: null})
     }catch (err){
+        console.log(err.message);
+    }
+})
+
+app.post("/stat", async (req, res) => {
+    try{
+        const { gameName, tagline } = req.body;
+        const puuid = await getSummonerPUUID(gameName, tagline);
+        res.render("stat", { currentPage: "stat", puuid });
+    }catch (err){
+        res.render("stat", { currentPage: "stat", puuid: "Error fetching PUUID" });
         console.log(err.message);
     }
 })
