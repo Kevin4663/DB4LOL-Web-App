@@ -70,3 +70,14 @@ main {
     font-size: 18px;
     border-radius: 8px;
 }
+img{
+    height: 40px;
+    width: 40x;
+}
+.champ-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px; /* space between grid items */
+    justify-items: center; /* center items horizontally */
+    margin-top: 20px;
+}
