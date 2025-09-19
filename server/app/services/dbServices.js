@@ -1,7 +1,8 @@
-import { get } from "mongoose";
 import { getLatestVersion } from "./riotServices.js";
+
 import Champ from "../models/Champ.js";
 import Item from "../models/Item.js"
+
 // champ data stored in json like 
 // {
 //   "type": "champion",
@@ -13,7 +14,8 @@ import Item from "../models/Item.js"
 //     "Akali": { /* champion object */ }
 //   }
 // }
-//
+
+
 export const getChampData = async () => {
     const version = await getLatestVersion();
     try {
