@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
-@plugin "daisyui" {
-    themes: coffee;
+
+@plugin "daisyui/theme" {
+  name: "KD";
+  --color-base-content: #998888;
+  --color-primary: #998888;
 }

@@ -7,6 +7,6 @@ const router = express.Router();
 
 //ROUTES
 //version
-router.get("/version", getVersion());
+router.get("/version", getVersion);
 
 export default router
