@@ -5,7 +5,7 @@ const StatPage = () => {
     <div>
       <div className='min-h-screen'>
       <Navbar/>
-    </div>
+      </div>
     </div>
   )
 }

@@ -3,17 +3,7 @@ import { getLatestVersion } from "./riotServices.js";
 import Champ from "../models/Champ.js";
 import Item from "../models/Item.js"
 
-// champ data stored in json like 
-// {
-//   "type": "champion",
-//   "format": "standAloneComplex",
-//   "version": "15.18.1",
-//   "data": {
-//     "Aatrox": { /* champion object */ },
-//     "Ahri": { /* champion object */ },
-//     "Akali": { /* champion object */ }
-//   }
-// }
+
 
 
 export const getChampData = async () => {
@@ -61,8 +51,21 @@ export const getItemData = async () => {
 };
 
 export const updateChampDatabase = async () => {
+    // provices the whole object
     const champData = await getChampData();
-    // accesses the value of the key value pair of data, all the champ objects
+    // accesses the value of the key value pair of data KEY, all the champ objects
+    // champ data stored in json like 
+    // {
+    //   "type": "champion",
+    //   "format": "standAloneComplex",
+    //   "version": "15.18.1",
+    //      HERE
+    //   "data": {
+    //     "Aatrox": { /* champion object */ },
+    //     "Ahri": { /* champion object */ },
+    //     "Akali": { /* champion object */ }
+    //   }
+    // }
     const champArr = Object.values(champData.data)
 
     for(const index of champArr){
@@ -122,3 +125,12 @@ export const updateItemDatabase = async () => {
         }
     }
 };
+
+export const getChampsFromDB = async () => {
+    try {
+        const champList = await Champ.find({}, "name icon");
+        return champList;
+    } catch (error) {
+        console.error("Error finding champlist from db",error)
+    }
+}
