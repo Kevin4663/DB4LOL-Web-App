@@ -9,4 +9,4 @@ const ChampBox = ({ champ }) => {
     </div>
   );
 };
-export default ChampBox
+export default ChampBox;

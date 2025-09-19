@@ -1,13 +1,13 @@
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 
 const AboutPage = () => {
   return (
     <div>
-      <div className='min-h-screen'>
-      <Navbar/>
+      <div className="min-h-screen">
+        <Navbar />
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default AboutPage
+export default AboutPage;

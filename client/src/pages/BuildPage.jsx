@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
-import Navbar from "../components/Navbar"
-import api from "../lib/axios.js"
-import { toast } from "react-hot-toast"; 
+import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import api from "../lib/axios.js";
+import { toast } from "react-hot-toast";
 import ChampBox from "../components/ChampBox";
 import RateLimitedUI from "../components/RateLimitedUI.jsx";
 
@@ -10,7 +10,7 @@ const BuildPage = () => {
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() =>{
+  useEffect(() => {
     const fetchChampList = async () => {
       try {
         const res = await api.get("/champlist");
@@ -30,22 +30,20 @@ const BuildPage = () => {
     };
 
     fetchChampList();
-  }, [])
+  }, []);
 
   return (
-
-      <div className='min-h-screen '>
-        <Navbar/>
-        {isRateLimited && <RateLimitedUI/>}
-        <div></div>
-        <div className="grid grid-cols-6 sm:grid-cols-7 md:grid-cols-8 lg:grid-cols-10 gap-1 w-max pl-6">
-          {champList.map( (champ, index) => (
-            <ChampBox champ={champ} key={index} />
-          ))}
-        </div>
+    <div className="min-h-screen ">
+      <Navbar />
+      {isRateLimited && <RateLimitedUI />}
+      <div></div>
+      <div className="grid grid-cols-6 sm:grid-cols-7 md:grid-cols-8 lg:grid-cols-10 gap-1 w-max pl-6">
+        {champList.map((champ, index) => (
+          <ChampBox champ={champ} key={index} />
+        ))}
       </div>
+    </div>
+  );
+};
 
-  )
-}
-
-export default BuildPage
+export default BuildPage;
