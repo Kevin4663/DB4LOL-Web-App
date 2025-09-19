@@ -1,6 +1,7 @@
 import { get } from "mongoose";
 import { getLatestVersion } from "./riotServices.js";
-import Champ from "../models/champ.js";
+import Champ from "../models/Champ.js";
+import Item from "../models/Item.js"
 // champ data stored in json like 
 // {
 //   "type": "champion",
@@ -13,7 +14,7 @@ import Champ from "../models/champ.js";
 //   }
 // }
 //
-export const get_champ_data = async () => {
+export const getChampData = async () => {
     const version = await getLatestVersion();
     try {
         const link = `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`;
@@ -35,8 +36,30 @@ export const get_champ_data = async () => {
 
 };
 
-export const updateDatabase = async () => {
-    const champData = await get_champ_data();
+export const getItemData = async () => {
+    const version = await getLatestVersion();
+    try {
+        const link = `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/item.json`;
+        const res = await fetch(link);
+
+        if (!res.ok) {
+            const errorBody = await res.text();
+            console.error(`Item Data fetch error (${res.status}):`, errorBody);
+            return null;
+        }
+
+        const dataObject = await res.json();
+        return dataObject;
+
+    } catch (error) {
+        console.error("Error fetching item data:", err);
+        return null; 
+    }
+
+};
+
+export const updateChampDatabase = async () => {
+    const champData = await getChampData();
     // accesses the value of the key value pair of data, all the champ objects
     const champArr = Object.values(champData.data)
 
@@ -71,7 +94,29 @@ export const updateDatabase = async () => {
             await newChamp.save();
             console.log(`${index.name} added`);
         } catch (error) {
-            console.error("Error adding champ to db",err)
+            console.error("Error adding champ to db",error)
+        }
+    }
+};
+
+export const updateItemDatabase = async () => {
+    const ItemData = await getItemData();
+    // accesses the value of the key value pair of data, all the item objects
+    const itemArr = Object.values(ItemData.data)
+
+    for(const index of itemArr){
+        const itemToInsert = {
+            name: index.name,
+            plaintext: index.plaintext,
+            icon: index.image.full,
+            blurb: index.gold.total
+        }
+        try {
+            const newItem = new Item(itemToInsert);
+            await newItem.save();
+            console.log(`${index.name} added`);
+        } catch (error) {
+            console.error("Error adding item to db",error)
         }
     }
 };

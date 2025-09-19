@@ -7,7 +7,7 @@ import { getLatestVersion } from "./services/riotServices.js";
 import { getSummonerPUUID } from "./services/riotServices.js";
 import { connectDB } from "./config/db.js"
 import dotenv from "dotenv";
-import { updateDatabase } from "./services/dbServices.js";
+import { updateItemDatabase } from "./services/dbServices.js";
 
 dotenv.config();
 const app = express();
@@ -36,7 +36,6 @@ app.use(async (req, res, next) => {
 app.use("", serverRoutes);
 
 connectDB();
-//updateDatabase();
 
 app.listen(port, () => {
     console.log(`listening on ${port} @ http://localhost:${port}/`)
