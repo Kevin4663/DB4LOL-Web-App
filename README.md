@@ -12,5 +12,5 @@ A MERN stack web app that uses the Riot Games API to help players craft and opti
 ## 🏗 Tech Stack
 **Frontend:** React, TailwindCSS (or your chosen styling library)  
 **Backend:** Node.js, Express  
-**Database:** MongoDB (Mongoose ORM)  
+**Database:** MongoDB (Mongoose)  
 **API:** Riot Games API 
