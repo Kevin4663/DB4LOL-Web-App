@@ -1,45 +1,63 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { useEffect, useState } from "react";
 import api from "../lib/axios.js";
 import { toast } from "react-hot-toast";
 
 const Navbar = () => {
-  const [version, setVersion] = useState("");
+  const [currentVersion, setCurrentVersion] = useState("");
 
   useEffect(() => {
-    const fetchVersion = async () => {
-      try {
-        const res = await api.get("/version");
-        setVersion(res.data.version);
-      } catch (error) {
-        console.error("Error fetching version:", error.response || error);
-        toast.error("Failed to load version");
-      }
+    const fetchVerison = async () => {
+      const res = await fetch(
+        "https://ddragon.leagueoflegends.com/api/versions.json"
+      );
+      const allVersions = await res.json();
+      setCurrentVersion(allVersions[0]);
     };
 
-    fetchVersion();
+    fetchVerison();
   }, []);
 
   return (
     <header>
-      <div className="mx-auto maxw-w-6xl p-4">
+      <div className="mx-auto max-w-6xl p-4">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-primary tracking-tighter">
             DB4LOL
           </h1>
           <div className="flex items-center gap-4">
-            <Link to={"/"} className="btn btn-ghost">
-              <span className="text-primary">Home</span>
-            </Link>
-            <Link to={"/build"} className="btn btn-ghost">
-              <span className="text-primary">Build</span>
-            </Link>
-            <Link to={"/stat"} className="btn btn-ghost">
-              <span className="text-primary">Stat</span>
-            </Link>
-            <Link to={"/about"} className="btn btn-ghost">
-              <span className="text-primary">About</span>
-            </Link>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `btn btn-ghost ${isActive ? "underline font-bold" : ""}`
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/build"
+              className={({ isActive }) =>
+                `btn btn-ghost ${isActive ? "underline font-bold" : ""}`
+              }
+            >
+              Build
+            </NavLink>
+            <NavLink
+              to="/stat"
+              className={({ isActive }) =>
+                `btn btn-ghost ${isActive ? "underline font-bold" : ""}`
+              }
+            >
+              Stat
+            </NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `btn btn-ghost ${isActive ? "underline font-bold" : ""}`
+              }
+            >
+              About
+            </NavLink>
             <Link
               to={
                 "https://www.leagueoflegends.com/en-us/news/tags/patch-notes/"
@@ -47,14 +65,14 @@ const Navbar = () => {
               target="_blank"
               className="btn btn-ghost"
             >
-              <span className="text-primary">{version || "Loading..."}</span>
+              {currentVersion || "Loading..."}
             </Link>
             <Link
               to={"https://github.com/Kevin4663"}
               target="_blank"
               className="btn btn-ghost"
             >
-              <span className="text-primary">Github</span>
+              Github
             </Link>
           </div>
         </div>

@@ -1,10 +1,8 @@
-import { getLatestVersion } from "./riotServices.js";
-
 import Champ from "../models/Champ.js";
 import Item from "../models/Item.js";
 
 export const getChampData = async () => {
-  const version = await getLatestVersion();
+  const version = await getVersion();
   try {
     const link = `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`;
     const res = await fetch(link);
@@ -18,13 +16,13 @@ export const getChampData = async () => {
     const dataObject = await res.json();
     return dataObject;
   } catch (error) {
-    console.error("Error fetching champ data:", err);
+    console.error("Error fetching champ data:", error);
     return null;
   }
 };
 
 export const getItemData = async () => {
-  const version = await getLatestVersion();
+  const version = await getVersion();
   try {
     const link = `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/item.json`;
     const res = await fetch(link);
@@ -38,7 +36,7 @@ export const getItemData = async () => {
     const dataObject = await res.json();
     return dataObject;
   } catch (error) {
-    console.error("Error fetching item data:", err);
+    console.error("Error fetching item data:", error);
     return null;
   }
 };
@@ -119,11 +117,11 @@ export const updateItemDatabase = async () => {
   }
 };
 
-export const getChampsFromDB = async () => {
+export const getChampsIconsFromDB = async () => {
   try {
-    const champList = await Champ.find({}, "name icon");
-    return champList;
+    const champIcons = await Champ.find({}, "icon");
+    return champIcons;
   } catch (error) {
-    console.error("Error finding champlist from db", error);
+    console.error("Error finding champIcons from db", error);
   }
 };
