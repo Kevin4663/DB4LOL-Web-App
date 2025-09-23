@@ -1,11 +1,11 @@
 import express from "express";
 
 //import controllers
-import { sendChampIcons } from "../controllers/serverControllers.js";
+import { sendChampData } from "../controllers/serverControllers.js";
 
 const router = express.Router();
 
 //ROUTES
-router.get("/champ-icons", sendChampIcons);
+router.get("/champ-data", sendChampData);
 
 export default router;

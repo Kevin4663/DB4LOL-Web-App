@@ -1,12 +1,12 @@
-import { getChampsIconsFromDB } from "../services/dbServices.js";
+import { getChampsDataFromDB } from "../services/dbServices.js";
 
-export const sendChampIcons = async (req, res) => {
+export const sendChampData = async (req, res) => {
   try {
-    const champIcons = await getChampsIconsFromDB();
-    // returns an array of champ icons
-    return res.status(200).json({ champIcons });
+    const champData = await getChampsDataFromDB();
+    // returns an array of champ Data
+    return res.status(200).json({ champData });
   } catch (error) {
-    console.error("Error sending champ Icons:", error.message);
-    return res.status(500).json({ error: "Failed to get champ Icons" });
+    console.error("Error sending champ Data:", error.message);
+    return res.status(500).json({ error: "Failed to get champ Data" });
   }
 };

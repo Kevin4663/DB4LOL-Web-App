@@ -117,11 +117,11 @@ export const updateItemDatabase = async () => {
   }
 };
 
-export const getChampsIconsFromDB = async () => {
+export const getChampsDataFromDB = async () => {
   try {
-    const champIcons = await Champ.find({}, "icon");
-    return champIcons;
+    const champData = await Champ.find({}, "name icon blurb");
+    return champData;
   } catch (error) {
-    console.error("Error finding champIcons from db", error);
+    console.error("Error finding champ data from db", error);
   }
 };

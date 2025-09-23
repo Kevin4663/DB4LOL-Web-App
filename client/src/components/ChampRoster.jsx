@@ -1,39 +1,34 @@
 import { useEffect, useState } from "react";
 import api from "../lib/axios.js";
 import { toast } from "react-hot-toast";
-import ChampBox from "../components/ChampBox";
+import ChampBox from "./ChampBox";
 
-const ChampRoster = () => {
-  const [champIcons, setChampList] = useState([]);
+const ChampRoster = ({ onSelectChamp }) => {
+  const [champData, setChampList] = useState([]);
 
   useEffect(() => {
-    const fetchChampIcons = async () => {
+    const fetchChampData = async () => {
       try {
-        const res = await api.get("/champ-icons");
-        setChampList(res.data.champIcons);
+        const res = await api.get("/champ-data");
+        setChampList(res.data.champData);
       } catch (error) {
-        console.log("Error loading Champ Icons");
-        console.log(error.response);
-        if (error.response?.status === 429) {
-        } else {
-          toast.error("Failed to load Champs Icons");
-        }
+        console.error("Error loading Champ data", error);
+        toast.error("Failed to load Champs data");
       }
     };
 
-    fetchChampIcons();
+    fetchChampData();
   }, []);
 
   return (
-    <div>
-      <div className="pl-6 text-2xl text-primary p-2 w-max">
-        <p>Champions</p>
-      </div>
-      <div className="grid grid-cols-6 sm:grid-cols-7 md:grid-cols-8 lg:grid-cols-10 gap-1 w-max pl-6">
-        {champIcons.map((champ, index) => (
-          <ChampBox champ={champ} key={index} />
-        ))}
-      </div>
+    <div className="grid grid-cols-6 sm:grid-cols-7 md:grid-cols-8 lg:grid-cols-10 gap-2">
+      {champData.map((champ) => (
+        <ChampBox
+          key={champ._id}
+          champ={champ}
+          onSelect={() => onSelectChamp(champ)}
+        />
+      ))}
     </div>
   );
 };
