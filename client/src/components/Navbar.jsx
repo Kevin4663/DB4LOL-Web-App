@@ -1,7 +1,5 @@
 import { Link, NavLink } from "react-router";
 import { useEffect, useState } from "react";
-import api from "../lib/axios.js";
-import { toast } from "react-hot-toast";
 
 const Navbar = () => {
   const [currentVersion, setCurrentVersion] = useState("");
@@ -19,13 +17,11 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header>
-      <div className="mx-auto max-w-6xl p-4">
+    <header className="">
+      <div className="mx-auto p-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-primary tracking-tighter">
-            DB4LOL
-          </h1>
-          <div className="flex items-center gap-4">
+          <h1 className="text-4xl font-bold text-primary">DB4LOL</h1>
+          <div className="flex items-center gap-2">
             <NavLink
               to="/"
               className={({ isActive }) =>

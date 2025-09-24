@@ -4,7 +4,7 @@ const ChampBox = ({ champ, onSelect }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div
-      className="relative flex flex-col items-center w-max"
+      className="relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onSelect}
@@ -12,11 +12,11 @@ const ChampBox = ({ champ, onSelect }) => {
       <img
         src={`https://ddragon.leagueoflegends.com/cdn/15.18.1/img/champion/${champ.icon}`}
         alt={`champ-${champ.name}`}
-        className="w-10 h-10 cursor-pointer"
+        className="w-10 cursor-pointer shadow-lg"
         loading="lazy"
       />
       {isHovered && (
-        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 max-w-xs p-2 rounded-lg bg-black text-xs shadow-lg z-50">
+        <div className="absolute mt-2 p-2 rounded-lg bg-black border-2 z-1">
           <p className="font-bold">{champ.name}</p>
         </div>
       )}

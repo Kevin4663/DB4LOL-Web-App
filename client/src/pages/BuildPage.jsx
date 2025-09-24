@@ -10,13 +10,12 @@ const BuildPage = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <div className="flex gap-6 p-6">
-        <ChampRoster onSelectChamp={setSelectedChamp} />
-
+      <div className="flex flex-1 p-5 gap-1 items-start">
         <ChampPortrait
           champ={selectedChamp}
           onClear={() => setSelectedChamp(null)}
         />
+        <ChampRoster onSelectChamp={setSelectedChamp}/>
       </div>
     </div>
   );
