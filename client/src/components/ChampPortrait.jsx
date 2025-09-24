@@ -2,7 +2,7 @@ import { X } from "lucide-react";
 
 const ChampPortrait = ({ champ, onClear }) => {
   return (
-    <div className="w-72 h-100 p-4 rounded-xl shadow-lg flex flex-col items-center justify-center text-center border-2 bg-gradient-to-br from-[#383636] to-[#291b1b]">
+    <div className="w-72 h-100 p-4 rounded-xl shadow-lg flex flex-col items-center justify-center text-center border-2 rounded-r-lg bg-base-200">
       {!champ ? (
         <p>Select a champion to see details</p>
       ) : (

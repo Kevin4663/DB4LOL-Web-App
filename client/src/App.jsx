@@ -7,8 +7,7 @@ import StatPage from "./pages/StatPage.jsx";
 
 const App = () => {
   return (
-    <div className="relative h-full w-full">
-      <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 bg-gradient-to-r from-[#383636] to-[#291b1b]" />
+    <div>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/build" element={<BuildPage />} />

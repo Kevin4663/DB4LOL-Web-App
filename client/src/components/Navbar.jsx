@@ -20,7 +20,7 @@ const Navbar = () => {
     <header className="">
       <div className="mx-auto p-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-4xl font-bold text-primary">DB4LOL</h1>
+          <h1 className="text-4xl font-bold">DB4LOL</h1>
           <div className="flex items-center gap-2">
             <NavLink
               to="/"
@@ -70,6 +70,11 @@ const Navbar = () => {
             >
               Github
             </Link>
+            <input
+              type="checkbox"
+              value="nord"
+              className="toggle theme-controller"
+            />
           </div>
         </div>
       </div>

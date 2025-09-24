@@ -19,3 +19,15 @@ export const getSummonerPUUID = async (gameName, tagline) => {
     return null;
   }
 };
+
+export const getCurrentVersion = async () => {
+  try {
+    const link = `https://ddragon.leagueoflegends.com/api/versions.json`;
+    const res = await fetch(link);
+    const dataObject = await res.json();
+    return dataObject[0];
+  } catch (error) {
+    console.error("Error fetching version data:", error);
+    return null;
+  }
+};

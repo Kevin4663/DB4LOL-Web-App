@@ -8,6 +8,7 @@ import path from "path";
 import serverRoutes from "./routes/serverRoutes.js";
 import { fileURLToPath } from "url";
 import { connectDB } from "./config/db.js";
+import { updateAllDatabase } from "./services/dbServices.js";
 
 import rateLimiter from "./middleware/rateLimiter.js";
 
@@ -31,7 +32,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(rateLimiter);
 app.use("", serverRoutes);
 
-connectDB().then(() => {
+connectDB().then(async () => {
+  try {
+    await updateAllDatabase();
+    console.log("Database good");
+  } catch (err) {
+    console.error("Error updating database:", err);
+  }
   app.listen(port, () => {
     console.log(`listening on ${port} @ http://localhost:${port}/`);
   });
