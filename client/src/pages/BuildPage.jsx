@@ -11,7 +11,7 @@ const BuildPage = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <div className="flex flex-1 p-5 gap-2 items-start">
+      <div className="flex flex-1 p-5 gap-2 justify-center items-start">
         <ChampPortrait
           champ={selectedChamp}
           onClear={() => setSelectedChamp(null)}

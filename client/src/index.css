@@ -1,3 +1,7 @@
+@font-face {
+  font-family: PixelifySans;
+  src: url("../src/assets/PixelifySans-Regular.ttf");
+}
 @import "tailwindcss";
 @plugin "daisyui";
 
@@ -39,3 +43,5 @@
 @plugin "daisyui" {
   themes: nord;
 }
+
+@theme
